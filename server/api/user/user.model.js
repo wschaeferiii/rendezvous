@@ -7,7 +7,7 @@ import {Schema} from 'mongoose';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-var UserSchema = new Schema({
+var UserSchema = new mongoose.Schema({
   name: String,
   email: {
     type: String,
@@ -39,7 +39,11 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  rdv : [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref: 'Rdv'
+  }]
 });
 
 /**

@@ -10,9 +10,11 @@ angular.module('rendezvousApp',
                'btford.socket-io',
                'ui.router',
                'ui.bootstrap',
-               'validation.match'
+               'validation.match',
+               'uiGmapgoogle-maps'
                ])
-  .config(function($urlRouterProvider, $locationProvider) {
-    $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true);
-  });
+});
+
+
+
+
