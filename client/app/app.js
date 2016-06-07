@@ -12,8 +12,7 @@ angular.module('rendezvousApp',
                'ui.bootstrap',
                'validation.match',
                'uiGmapgoogle-maps'
-               ])
-});
+               ]);
 
 
 

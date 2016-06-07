@@ -3,13 +3,13 @@
 
   class RdvsComponent {
     constructor(uiGmapGoogleMapApi) {
-
+      console.log('RdvsComponent is alive')
       this.map = {
-        center: {latitude: 45, longitude: -73 }, zoom: 8
-      };
-
-      uiGmapGoogleMapApi.then(function(maps) {
-
+              center: {latitude: 51.219053, longitude: 4.404418},
+              zoom: 14
+            }
+      uiGmapGoogleMapApi.then(function(map) {
+        console.log('asynchronous function!')
       });
     };
   };
