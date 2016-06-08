@@ -2,25 +2,27 @@
   <ui-gmap-google-map
     center='$ctrl.map.center'
     zoom='$ctrl.map.zoom'>
+      <ui-gmap-marker
+        idKey = '$ctrl.mapMarker.idKey'
+        coords = '$ctrl.mapMarker.coords'>
+      </ui-gmap-marker>
   </ui-gmap-google-map>
 
-  <br />
   <br />
 
   <ul>
     <li ng-repeat="rdv in $ctrl.rdvList">
-    {{rdv.title}} - {{rdv.originAddress}} - {{ rdv.destinationAddress}}
-    </li>
+    Destination: {{ rdv.destinationAddress}}
+    <button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)"></li>
   </ul>
 
   <br />
-  <br />
 
-  <form class="add-rdv" ng-submit="$ctrl.addRdv()">
-    <input type="text" class="form-control"  ng-model="$ctrl.title" placeholder="title">
-    <input type="text" class="form-control"  ng-model="$ctrl.originAddress" placeholder="start">
-    <input type="text" class="form-control"  ng-model="$ctrl.destinationAddress" placeholder="end">
-    <input type="submit" class="btn btn-add" value="+">
+  <form class="rdv-form">
+    <br />
+    <input type="text" class="form-control" ng-model="$ctrl.newRdv" placeholder="Enter your Rendezvous address here">
+    <br />
+    <button type="submit" class="btn btn-primary" ng-click='$ctrl.addRdv()'>Add</button>
   </form>
 
 </div>

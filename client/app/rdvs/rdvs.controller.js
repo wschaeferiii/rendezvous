@@ -1,85 +1,102 @@
 'use strict';
 (function(){
 
-class RdvsComponent {
-  constructor(rdvService, uiGmapGoogleMapApi) {
+  class RdvsComponent {
+    constructor(rdvService, uiGmapGoogleMapApi, $http, $scope, socket) {
 
-    console.log('RdvsComponent is alive!');
+      console.log('RdvsComponent is alive!');
 
-    this.rdvService = rdvService;
-    this.addRdv = addRdv;
-    this.rdvList = [];
+      this.rdvService = rdvService;
+      this.$http = $http;
+      this.socket = socket;
+      this.rdvList = [];
 
-    this.map = {
-      center: {
-        latitude: 37.7749295,
-        longitude: -122.4194155
-      },
-      zoom: 13
+      $scope.$on('$destroy', function() {
+        socket.unsyncUpdates('rdv');
+      });
+
+      // this.listRdvs();
+
+      this.grabLocation();
+
+      this.addGeoLocationMarker();
+
+
+      this.map = {
+        center: {
+          latitude: '',
+          longitude: ''
+        },
+        zoom: 13
+      };
+
+      this.mapMarker = {
+        idKey: 1,
+        coords: {
+          latitude: '',
+          longitude: ''
+        }
+      }
+
+      uiGmapGoogleMapApi
+      .then(function(maps){
+
+      });
     };
 
-    this.listRdvs();
-
-
-    function addRdv() {
-      this.rdvList.push({title: this.title, originAddress: this.originAddress, destinationAddress: this.destinationAddress});
+    grabLocation() {
+      this.rdvService.getGeoLocation()
+      .then((json) => {
+        this.geoLocation = json.data;
+        console.log(this.geoLocation);
+        this.map.center.latitude = this.geoLocation.location.lat;
+        this.map.center.longitude = this.geoLocation.location.lng;
+      });
     }
 
-    uiGmapGoogleMapApi
-    .then(function(maps){
+    addGeoLocationMarker() {
+      this.rdvService.getGeoLocation()
+      .then((json) => {
+        this.geoLocation = json.data;
+        this.mapMarker.coords.latitude = this.geoLocation.location.lat;
+        console.log('lat: ', this.mapMarker.coords.latitude)
+        this.mapMarker.coords.longitude = this.geoLocation.location.lng;
+        console.log('long: ', this.mapMarker.coords.longitude)
+      });
+    };
 
-    });
-  };
+    // listRdvs() {
+    //   // use rdvService b/c we need origin and destination addresses from rdv model
+    //   this.rdvService.getRdvs()
+    //   .then((json) => {
+    //     this.rdvList = json.data;
+    //     console.log('rdvList', this.rdvList);
+    //   });
+    // };
 
-  // use rdvService b/c we need origin and destination addresses from rdv model
-  listRdvs() {
-    this.rdvService.getRdvs()
-    .then((json) => {
-      this.rdvList = json.data;
-      console.log('rdvList', this.rdvList);
-    });
+    $onInit() {
+      this.$http.get('/api/rdvs')
+        .then(response => {
+          this.rdvList = response.data;
+          this.socket.syncUpdates('rdv', this.rdvList)
+        });
+    }
 
+    addRdv() {
+      if (this.newRdv) {
+        this.$http.post('/api/rdvs', {
+          destinationAddress: this.newRdv
+        });
+        console.log('newRdv: ', this.newRdv);
+        this.newRdv = '';
+      }
+    }
 
-  };
+    deleteRdv(Rdv) {
+      this.$http.delete('/api/rdvs/' + rdv._id);
+    }
+  }
 
-
-
-
-  //     return uiGmapGoogleMapApi;
-
-  //   })
-
-  //   // load the map and create directions service and renderer
-  //   .then(function(maps) {
-
-
-  //     this.directionsService = new google.maps.DirectionsService();
-  //     this.directionsDisplay = new google.maps.DirectionsRenderer();
-
-  //     this.map = {
-  //       center: {latitude: 33.7490, longitude: -84.3880},
-  //       zoom: 10
-  //     };
-
-  //     return uiGmapIsReady.promise(1);
-
-  //   })
-
-  //   .then(function(instances) {
-  //     var instanceMap = instances[0].map;
-
-  //     this.directionsDisplay.setMap(instanceMap);
-
-  //     this.directionsService.route(directionsServiceRequest, function(response, status) {
-  //       if (status == google.maps.DirectionsStatus.OK) {
-  //           this.directionsDisplay.setDirections(response);
-  //       }
-  //     });
-  //   })
-
-  // };
-
-  };
   angular.module('rendezvousApp')
   .component('rdvs', {
     templateUrl: 'app/rdvs/rdvs.html',

@@ -27,6 +27,7 @@
         this.$http.post('/api/things', {
           name: this.newThing
         });
+        console.log('newThing: ', this.newThing);
         this.newThing = '';
       }
     }

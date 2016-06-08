@@ -12,5 +12,9 @@ angular.module('rendezvousApp')
     svc.getRdvs = function() {
       return $http.get('/api/rdvs');
     };
+
+    svc.getGeoLocation = function() {
+      return $http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAiehlhCpXvmdFpemTf45PJNw94Rhbpvt8');
+    };
   });
 

@@ -62,8 +62,6 @@ User.find({}).remove()
 Rdv.find({}).remove()
 .then(() => {
   return Rdv.create({
-      title: "First Trip",
-      originAddress: "675 Ponce de Leon Ave NE Atlanta, GA 30308",
       destinationAddress: "433 N. Highland Ave NE Atlanta, GA 30307"
     })
   .then(function(rdvs) {

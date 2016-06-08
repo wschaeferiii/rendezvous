@@ -8,3 +8,4 @@ angular.module('rendezvousApp')
         template: '<rdvs></rdvs>'
       });
   });
+
