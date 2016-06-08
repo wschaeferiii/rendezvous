@@ -6,6 +6,7 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import Rdv from '../api/rdv/rdv.model';
 
 Thing.find({}).remove()
   .then(() => {
@@ -57,3 +58,16 @@ User.find({}).remove()
       console.log('finished populating users');
     });
   });
+
+Rdv.find({}).remove()
+.then(() => {
+  return Rdv.create({
+      title: "First Trip",
+      originAddress: "675 Ponce de Leon Ave NE Atlanta, GA 30308",
+      destinationAddress: "433 N. Highland Ave NE Atlanta, GA 30307"
+    })
+  .then(function(rdvs) {
+    console.log('rdvs: ', rdvs);
+  });
+});
+
