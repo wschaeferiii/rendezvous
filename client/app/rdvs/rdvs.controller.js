@@ -2,14 +2,24 @@
 (function(){
 
 class RdvsComponent {
-  constructor(rdvService, uiGmapGoogleMapApi, uiGmapIsReady) {
+  constructor(rdvService, uiGmapGoogleMapApi) {
 
     console.log('RdvsComponent is alive!');
 
     this.rdvService = rdvService;
     this.addRdv = addRdv;
     this.rdvList = [];
+
+    this.map = {
+      center: {
+        latitude: 37.7749295,
+        longitude: -122.4194155
+      },
+      zoom: 13
+    };
+
     this.listRdvs();
+
 
     function addRdv() {
       this.rdvList.push({title: this.title, originAddress: this.originAddress, destinationAddress: this.destinationAddress});
@@ -17,13 +27,7 @@ class RdvsComponent {
 
     uiGmapGoogleMapApi
     .then(function(maps){
-      this.map = {
-          center: {
-              latitude: 37.7749295,
-              longitude: -122.4194155
-          },
-          zoom: 13
-      };
+
     });
   };
 
