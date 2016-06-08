@@ -92,7 +92,7 @@
       }
     }
 
-    deleteRdv(Rdv) {
+    deleteRdv(rdv) {
       this.$http.delete('/api/rdvs/' + rdv._id);
     }
   }
