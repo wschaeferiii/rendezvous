@@ -8,11 +8,12 @@
       </ui-gmap-marker>
   </ui-gmap-google-map>
 
-  <br />
 
+  <br />
+  <h1>Destinations:</h1>
   <ul>
-    <li ng-repeat="rdv in $ctrl.rdvList">
-    Destination: {{ rdv.destinationAddress}}
+    <li ng-repeat="rdv in $ctrl.rdvList" class='address'>
+     {{ rdv.destinationAddress}}
     <button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)"><button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)">&times;</button></li>
   </ul>
 
@@ -23,7 +24,18 @@
     <input type="text" class="form-control" ng-model="$ctrl.newRdv" placeholder="Enter your Rendezvous address here">
     <br />
     <button type="submit" class="btn btn-primary" ng-click='$ctrl.addRdv()'>Add</button>
+
   </form>
+    <div class='container-fluid'>
+      <div angular-google-maps-geocoder
+        placeid='{{newPlaceId}}'
+        output="out"
+        placeholder="Rendezvous point..."
+        min-length="2"
+        wait-ms="500">
+      </div>
+      <pre>{{ out | json }}</pre>
+    </div>
 
 </div>
 

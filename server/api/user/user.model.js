@@ -40,10 +40,8 @@ var UserSchema = new mongoose.Schema({
   twitter: {},
   google: {},
   github: {},
-  rdv : [{
-    type : mongoose.Schema.Types.ObjectId,
-    ref: 'Rdv'
-  }]
+  currentLat: Number,
+  currentLng: Number
 });
 
 /**
