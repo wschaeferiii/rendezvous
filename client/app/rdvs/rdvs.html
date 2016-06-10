@@ -2,9 +2,9 @@
   <ui-gmap-google-map
     center='$ctrl.map.center'
     zoom='$ctrl.map.zoom'>
-      <ui-gmap-marker
-        idKey = '$ctrl.mapMarker.idKey'
-        coords = '$ctrl.mapMarker.coords'>
+      <ui-gmap-marker ng-repeat='marker in $ctrl.markers'
+        idKey = 'marker._id'
+        coords = 'marker.coords'>
       </ui-gmap-marker>
   </ui-gmap-google-map>
 

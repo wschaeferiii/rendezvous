@@ -3,8 +3,10 @@
 import mongoose from 'mongoose';
 
 var PersonSchema = new mongoose.Schema({
-  currentLat: Number,
-  currentLng: Number
+  coords: {
+    latitude: Number,
+    longitude: Number
+  }
 });
 
 export default mongoose.model('Person', PersonSchema);
