@@ -9,4 +9,9 @@ angular.module('rendezvousApp')
   svc.getPersons = function() {
     return $http.get('/api/persons');
   }
+
+  svc.deletePerson = function(person) {
+    return $http.delete('api/persons/' + person.id);
+  }
+
 });
