@@ -12,10 +12,8 @@
       this.socket = socket;
       this.rdvList = [];
       this.markers = [];
-      this.markerId = 0;
 
-
-      this.newPlaceId = 'ChIJdd4hrwug2EcRmSrV3Vo6llI';
+      this.placeId = 'ChIJdd4hrwug2EcRmSrV3Vo6llI';
 
       $scope.$on('$destroy', function() {
         socket.unsyncUpdates('person');
@@ -45,8 +43,13 @@
         this.markers = response.data;
         console.log('this.markers: ', this.markers);
         this.socket.syncUpdates('person', this.markers);
+      })
+      .then(this.$http.get('/api/rdvs'))
+      .then(response => {
+        this.rdvList = response.data;
+        this.socket.syncUpdates('rdv', this.rdvList);
       });
-    }
+    };
 
     centerMapFromLocation() {
       this.rdvService.getGeoLocation()
@@ -74,13 +77,23 @@
     };
 
     addRdv() {
-      if (this.newRdv) {
-        this.$http.post('/api/rdvs', {
-          destinationAddress: this.newRdv
-        });
-        this.newRdv = '';
-      }
-    }
+      this.rdvLat = this.output.geometry.location.lat();
+      console.log(this.rdvLat);
+
+      this.rdvLng = this.output.geometry.location.lng();
+      console.log(this.rdvLng);
+
+      this.$http.post('/api/rdvs', {
+        coords: {
+          latitude: this.rdvLat,
+          longitude: this.rdvLng
+        },
+        address: this.output.formatted_address
+      })
+      .then(function(post) {
+        console.log(post.data);
+      });
+    };
 
     deleteRdv(rdv) {
       this.$http.delete('/api/rdvs/' + rdv._id);

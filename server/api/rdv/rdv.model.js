@@ -3,7 +3,11 @@
 import mongoose from 'mongoose';
 
 var RdvSchema = new mongoose.Schema({
-  destinationAddress: String
+  coords: {
+    latitude: Number,
+    longitude: Number
+  },
+  address: String
 });
 
 export default mongoose.model('Rdv', RdvSchema);

@@ -6,7 +6,15 @@
         idKey = 'marker._id'
         coords = 'marker.coords'>
       </ui-gmap-marker>
+      <ui-gmap-marker ng-repeat='rdv in $ctrl.rdvList'
+      idKey = 'rdv._id'
+      coords = 'rdv.coords'>
+      </ui-gmap-marker>
   </ui-gmap-google-map>
+
+  <br />
+
+<div class='container-fluid'>
 
   <button type="submit" class="btn btn-primary" ng-click='$ctrl.addPersonCoordsToServer()'>Make Visible!</button>
 
@@ -20,23 +28,26 @@
   </ul>
 
   <br />
-
-  <form class="rdv-form">
+<!--
+   <form class="rdv-form">
     <br />
     <input type="text" class="form-control" ng-model="$ctrl.newRdv" placeholder="Enter your Rendezvous address here">
     <br />
-    <button type="submit" class="btn btn-primary" ng-click='$ctrl.addRdv()'>Add</button>
-  </form>
+  </form> -->
 
-  <div class='container-fluid'>
+
     <div angular-google-maps-geocoder
-      placeid='{{$ctrl.newPlaceId}}'
-      output="ctrl.out"
+      placeid='{{$ctrl.placeId}}'
+      output="$ctrl.output"
       placeholder="Rendezvous point..."
       min-length="2"
       wait-ms="500">
     </div>
-    <pre>{{ ctrl.out | json }}</pre>
+    <br />
+    <button type="submit" class="btn btn-primary" ng-click='$ctrl.addRdv()'>Add</button>
+    <br />
+    <br />
+    <pre>{{ $ctrl.output | json }}</pre>
   </div>
 </div>
 

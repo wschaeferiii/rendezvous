@@ -59,13 +59,4 @@ User.find({}).remove()
     });
   });
 
-Rdv.find({}).remove()
-.then(() => {
-  return Rdv.create({
-      destinationAddress: "433 N. Highland Ave NE Atlanta, GA 30307"
-    })
-  .then(function(rdvs) {
-    console.log('rdvs: ', rdvs);
-  });
-});
 
