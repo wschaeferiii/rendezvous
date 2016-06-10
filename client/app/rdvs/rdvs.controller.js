@@ -21,6 +21,8 @@
 
       this.centerMapFromLocation();
 
+      this.addRdvToMap();
+
       this.map = {
         center: {
           latitude: '',
@@ -31,7 +33,7 @@
 
       uiGmapGoogleMapApi
       .then(function(){
-        this.addRdvToMap();
+
       });
 
     };
