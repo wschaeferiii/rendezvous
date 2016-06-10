@@ -22,7 +22,6 @@
       });
 
       this.centerMapFromLocation();
-      // this.addGeoLocationMarker();
 
       this.map = {
         center: {
@@ -57,15 +56,6 @@
         this.map.center.longitude = this.geoLocation.location.lng;
       });
     }
-
-    // addGeoLocationMarker() {
-    //   this.rdvService.getGeoLocation()
-    //   .then((json) => {
-    //     this.geoLocation = json.data;
-    //     this.mapMarker.coords.latitude = this.geoLocation.location.lat;
-    //     this.mapMarker.coords.longitude = this.geoLocation.location.lng;
-    //   });
-    // };
 
     addPersonCoordsToServer() {
       this.rdvService.getGeoLocation()
