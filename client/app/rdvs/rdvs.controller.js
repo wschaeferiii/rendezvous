@@ -31,7 +31,7 @@
 
       uiGmapGoogleMapApi
       .then(function(){
-
+        this.addRdvToMap();
       });
 
     };
@@ -43,13 +43,16 @@
         this.markers = response.data;
         console.log('this.markers: ', this.markers);
         this.socket.syncUpdates('person', this.markers);
-      })
-      .then(this.$http.get('/api/rdvs'))
+      });
+    };
+
+    addRdvToMap() {
+      this.$http.get('/api/rdvs')
       .then(response => {
         this.rdvList = response.data;
         this.socket.syncUpdates('rdv', this.rdvList);
       });
-    };
+    }
 
     centerMapFromLocation() {
       this.rdvService.getGeoLocation()
