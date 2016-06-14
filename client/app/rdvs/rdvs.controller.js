@@ -19,7 +19,7 @@
         socket.unsyncUpdates('person');
       });
 
-      this.centerMapFromLocation();
+      this.centerMapFromGeoLocation();
 
       this.addRdvToMap();
 
@@ -56,7 +56,7 @@
       });
     }
 
-    centerMapFromLocation() {
+    centerMapFromGeoLocation() {
       this.rdvService.getGeoLocation()
       .then((json) => {
         this.geoLocation = json.data;
