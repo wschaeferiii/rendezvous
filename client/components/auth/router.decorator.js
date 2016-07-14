@@ -31,7 +31,7 @@
               }
 
               event.preventDefault();
-              $state.go('main');
+              $state.go('rdvs');
             });
         }
       });
