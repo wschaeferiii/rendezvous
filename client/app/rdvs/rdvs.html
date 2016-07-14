@@ -23,17 +23,11 @@
   <h1>Destinations:</h1>
   <ul>
     <li ng-repeat="rdv in $ctrl.rdvList" class='address'>
-     {{ rdv.destinationAddress}}
-    <button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)"><button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)">&times;</button></li>
+     {{ rdv.address}}
+    <button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)"><button type="button" class="danger" ng-click="$ctrl.deleteRdv(rdv)">&times;</button></li>
   </ul>
 
   <br />
-<!--
-   <form class="rdv-form">
-    <br />
-    <input type="text" class="form-control" ng-model="$ctrl.newRdv" placeholder="Enter your Rendezvous address here">
-    <br />
-  </form> -->
 
 
     <div angular-google-maps-geocoder
@@ -45,10 +39,6 @@
     </div>
     <br />
     <button type="submit" class="btn btn-primary" ng-click='$ctrl.addRdv()'>Add</button>
-    <br />
-    <br />
-    <pre>{{ $ctrl.output | json }}</pre>
-  </div>
 </div>
 
 

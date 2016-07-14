@@ -13,15 +13,13 @@
       this.rdvList = [];
       this.markers = [];
 
-      this.placeId = 'ChIJdd4hrwug2EcRmSrV3Vo6llI';
+      this.placeId = '5788098ed1beee0cb7917ab3';
 
       $scope.$on('$destroy', function() {
         socket.unsyncUpdates('person');
       });
 
       this.centerMapFromGeoLocation();
-
-      this.addRdvToMap();
 
       this.map = {
         center: {
@@ -41,10 +39,13 @@
     $onInit() {
       this.$http.get('/api/persons')
       .then(response => {
-        console.log('persons: ', response.data);
         this.markers = response.data;
-        console.log('this.markers: ', this.markers);
         this.socket.syncUpdates('person', this.markers);
+      });
+      this.rdvService.getRdvs()
+      .then(response => {
+        this.rdvList = response.data;
+        this.socket.syncUpdates('rdv', this.rdvList);
       });
     };
 
