@@ -18,13 +18,20 @@
 
   <button type="submit" class="btn btn-primary" ng-click='$ctrl.addPersonCoordsToServer()'>Make Visible!</button>
 
-
+  <h1>People:</h1>
   <br />
+  <ul>
+    <li ng-repeat='marker in $ctrl.markers' class='people'>
+      {{person.coords}}
+    <button type="button" class="close" ng-click="$ctrl.deletePerson(marker)"><button type="button" ng-click="$ctrl.deletePerson(marker)">&times;</button>
+    </li>
+
   <h1>Destinations:</h1>
   <ul>
     <li ng-repeat="rdv in $ctrl.rdvList" class='address'>
      {{ rdv.address}}
-    <button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)"><button type="button" class="danger" ng-click="$ctrl.deleteRdv(rdv)">&times;</button></li>
+    <button type="button" class="close" ng-click="$ctrl.deleteRdv(rdv)"><button type="button" ng-click="$ctrl.deleteRdv(rdv)">&times;</button>
+    </li>
   </ul>
 
   <br />

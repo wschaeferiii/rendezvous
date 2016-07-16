@@ -40,6 +40,7 @@
       this.$http.get('/api/persons')
       .then(response => {
         this.markers = response.data;
+        console.log('markers: ', this.markers);
         this.socket.syncUpdates('person', this.markers);
       });
       this.rdvService.getRdvs()
@@ -84,10 +85,7 @@
 
     addRdv() {
       this.rdvLat = this.output.geometry.location.lat();
-      console.log(this.rdvLat);
-
       this.rdvLng = this.output.geometry.location.lng();
-      console.log(this.rdvLng);
 
       this.$http.post('/api/rdvs', {
         coords: {
@@ -103,6 +101,10 @@
 
     deleteRdv(rdv) {
       this.$http.delete('/api/rdvs/' + rdv._id);
+    }
+
+    deletePerson(person) {
+      this.personsService.deletePerson(person);
     }
 
   }

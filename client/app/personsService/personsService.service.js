@@ -11,7 +11,7 @@ angular.module('rendezvousApp')
   }
 
   svc.deletePerson = function(person) {
-    return $http.delete('api/persons/' + person.id);
+    return $http.delete('api/persons/' + person._id);
   }
 
 });
