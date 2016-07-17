@@ -2,9 +2,9 @@
   <ui-gmap-google-map
     center='$ctrl.map.center'
     zoom='$ctrl.map.zoom'>
-      <ui-gmap-marker ng-repeat='marker in $ctrl.markers'
-        idKey = 'marker._id'
-        coords = 'marker.coords'>
+      <ui-gmap-marker ng-repeat='person in $ctrl.peopleList'
+        idKey = 'person._id'
+        coords = 'person.coords'>
       </ui-gmap-marker>
       <ui-gmap-marker ng-repeat='rdv in $ctrl.rdvList'
       idKey = 'rdv._id'
@@ -16,14 +16,31 @@
 
 <div class='container-fluid'>
 
+<h1>Basic (fetch once)</h1>
+    Latitude: location.coords.latitude {{$ctrl.htmlgeolocation.coords.latitude}}
+    <br />
+    Longitude: location.coords.longitude {{$ctrl.htmlgeolocation.coords.longitude}}
+    <br />
+    Timestamp: location.timestamp {{$ctrl.htmlgeolocation.timestamp}}
+    <h1>Advanced (fetch once)</h1>
+    Latitude: $geolocation.position.coords.latitude {{$ctrl.$geolocation.position.coords.latitude}}
+    <br />
+    Longitude: geolocation.position.coords.longitude {{$ctrl.$geolocation.position.coords.longitude}}
+    <br />
+    Timestamp: $geolocation.position.timestamp {{$ctrl.$geolocation.position.timestamp}}
+
   <button type="submit" class="btn btn-primary" ng-click='$ctrl.addPersonCoordsToServer()'>Make Visible!</button>
+
+  <button type="submit" class="btn btn-primary" ng-click='$ctrl.getCurrentLocation()'>Geolocate!</button>
+
+  <button type="submit" class="btn btn-primary" ng-click='$ctrl.watchLocation()'>Watch!</button>
 
   <h1>People:</h1>
   <br />
   <ul>
-    <li ng-repeat='marker in $ctrl.markers' class='people'>
-      {{marker.coords}}
-    <button type="button" class="close" ng-click="$ctrl.deletePerson(marker)"><button type="button" ng-click="$ctrl.deletePerson(marker)">&times;</button>
+    <li ng-repeat='person in $ctrl.peopleList' class='people'>
+      {{person.coords}}
+    <button type="button" class="close" ng-click="$ctrl.deletePerson(person)"><button type="button" ng-click="$ctrl.deletePerson(person)">&times;</button>
     </li>
 
   <h1>Destinations:</h1>

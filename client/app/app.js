@@ -12,7 +12,8 @@ angular.module('rendezvousApp',
              'ui.bootstrap',
              'validation.match',
              'uiGmapgoogle-maps',
-             'angular-google-maps-geocoder']
+             'angular-google-maps-geocoder',
+             'ngGeolocation']
 );
 
 

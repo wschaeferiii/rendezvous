@@ -2,24 +2,27 @@
 (function(){
 
   class RdvsComponent {
-    constructor(rdvService, personsService, uiGmapGoogleMapApi, $http, $scope, socket, geocoder) {
-
-      console.log('RdvsComponent is alive!');
+    constructor(rdvService, personsService, uiGmapGoogleMapApi, $http, $scope, socket, geocoder, $geolocation) {
 
       this.rdvService = rdvService;
       this.personsService = personsService;
+      this.$geolocation = $geolocation;
       this.$http = $http;
       this.socket = socket;
       this.rdvList = [];
-      this.markers = [];
+      this.peopleList = [];
+      this.htmlgeolocation = {};
+      this.$scope = $scope;
 
-      this.placeId = '5788098ed1beee0cb7917ab3';
+      this.placeId = '';
+
+      this.coords = this.$geolocation.position.coords; // this is regularly updated
+
+      this.error = this.$geolocation.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
 
       $scope.$on('$destroy', function() {
         socket.unsyncUpdates('person');
       });
-
-      this.centerMapFromGeoLocation();
 
       this.map = {
         center: {
@@ -36,12 +39,28 @@
 
     };
 
+    getCurrentLocation() {
+      this.$geolocation.getCurrentPosition()
+      .then(location => {
+        this.htmlgeolocation = location;
+     });
+    }
+
+    watchLocation() {
+      this.$geolocation.watchPosition({
+        timeout: 10000,
+        maximumAge: 2,
+        enableHighAccuracy: true
+      });
+    }
+
     $onInit() {
+      this.centerMapFromGeoLocation();
       this.$http.get('/api/persons')
       .then(response => {
-        this.markers = response.data;
-        console.log('markers: ', this.markers);
-        this.socket.syncUpdates('person', this.markers);
+        this.peopleList = response.data;
+        console.log('peopleList: ', this.peopleList);
+        this.socket.syncUpdates('person', this.peopleList);
       });
       this.rdvService.getRdvs()
       .then(response => {
@@ -49,14 +68,6 @@
         this.socket.syncUpdates('rdv', this.rdvList);
       });
     };
-
-    addRdvToMap() {
-      this.$http.get('/api/rdvs')
-      .then(response => {
-        this.rdvList = response.data;
-        this.socket.syncUpdates('rdv', this.rdvList);
-      });
-    }
 
     centerMapFromGeoLocation() {
       this.rdvService.getGeoLocation()
@@ -68,16 +79,16 @@
     }
 
     addPersonCoordsToServer() {
-      this.rdvService.getGeoLocation()
-      .then((json) => {
-        this.geoLocation = json.data;
-        return this.geoLocation;
+      this.$geolocation.getCurrentPosition()
+      .then(location => {
+        this.htmlgeolocation = location;
+        return this.htmlgeolocation;
       })
       .then((geoLocation) => {
         this.$http.post('/api/persons', {
           coords: {
-            latitude: geoLocation.location.lat,
-            longitude: geoLocation.location.lng
+            latitude: this.htmlgeolocation.coords.latitude,
+            longitude: this.htmlgeolocation.coords.longitude
           }
         })
       });
