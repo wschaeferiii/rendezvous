@@ -39,6 +39,12 @@
 
     };
 
+    convertDate() {
+      var newDate = new Date();
+      newDate.setTime(this.$geolocation.position.timestamp* 1000);
+      dateString = newDate.toUTCString();
+    }
+
     getCurrentLocation() {
       this.$geolocation.getCurrentPosition()
       .then(location => {
@@ -78,7 +84,7 @@
       });
     }
 
-    addPersonCoordsToServer() {
+    addPerson() {
       this.$geolocation.getCurrentPosition()
       .then(location => {
         this.htmlgeolocation = location;

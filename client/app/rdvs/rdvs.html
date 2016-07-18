@@ -16,32 +16,34 @@
 
 <div class='container-fluid'>
 
-<h1>Basic (fetch once)</h1>
-    Latitude: location.coords.latitude {{$ctrl.htmlgeolocation.coords.latitude}}
-    <br />
-    Longitude: location.coords.longitude {{$ctrl.htmlgeolocation.coords.longitude}}
-    <br />
-    Timestamp: location.timestamp {{$ctrl.htmlgeolocation.timestamp}}
-    <h1>Advanced (fetch once)</h1>
-    Latitude: $geolocation.position.coords.latitude {{$ctrl.$geolocation.position.coords.latitude}}
-    <br />
-    Longitude: geolocation.position.coords.longitude {{$ctrl.$geolocation.position.coords.longitude}}
-    <br />
-    Timestamp: $geolocation.position.timestamp {{$ctrl.$geolocation.position.timestamp}}
-
-  <button type="submit" class="btn btn-primary" ng-click='$ctrl.addPersonCoordsToServer()'>Make Visible!</button>
-
-  <button type="submit" class="btn btn-primary" ng-click='$ctrl.getCurrentLocation()'>Geolocate!</button>
+  <button type="submit" class="btn btn-primary" ng-click='$ctrl.addPerson()'>Geolocate!</button>
 
   <button type="submit" class="btn btn-primary" ng-click='$ctrl.watchLocation()'>Watch!</button>
 
-  <h1>People:</h1>
   <br />
+
+  <h1>Current Location</h1>
+  <ul>
+  <li>Latitude: {{$ctrl.$geolocation.position.coords.latitude}}
+  </li>
+  <li>
+  Longitude: {{$ctrl.$geolocation.position.coords.longitude}}
+  </li>
+  <li>
+  Timestamp: {{$ctrl.$geolocation.position.timestamp}}
+  </li>
+  </ul>
+
+  <br />
+
+  <h1>People:</h1>
   <ul>
     <li ng-repeat='person in $ctrl.peopleList' class='people'>
       {{person.coords}}
     <button type="button" class="close" ng-click="$ctrl.deletePerson(person)"><button type="button" ng-click="$ctrl.deletePerson(person)">&times;</button>
     </li>
+
+    <br />
 
   <h1>Destinations:</h1>
   <ul>
@@ -53,7 +55,6 @@
 
   <br />
 
-
     <div angular-google-maps-geocoder
       placeid='{{$ctrl.placeId}}'
       output="$ctrl.output"
@@ -63,6 +64,7 @@
     </div>
     <br />
     <button type="submit" class="btn btn-primary" ng-click='$ctrl.addRdv()'>Add</button>
+    </div>
 </div>
 
 
