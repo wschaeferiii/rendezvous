@@ -2,8 +2,6 @@
 
 "Uber for Friends" - A MEAN app that syncs location and meet up locations between users in real time.
 
-[Link to Rendezvous on Heroku](https://morning-coast-84552.herokuapp.com)
-
 ## Technologies Used
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.7.5.
