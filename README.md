@@ -1,6 +1,6 @@
 # Rendezvous
 
-"Uber for Friends" - A MEAN app that syncs location and meet up locations between users in real time.
+Track your friends when you need to meetup. MEAN web-app that syncs location and meet up locations between users in real time.
 
 ## Technologies Used
 
@@ -17,7 +17,6 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 
 ## Features
-- Passport Authetication
 - Full featured Google Map using AngularJS directives
 - Plot user locations on map based on Google Maps Geolocation API and Angular Google Maps marker directives
 - Search using Google Maps Places Library and getting geocoded addresses in an Angular directive
@@ -31,11 +30,12 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 - Directions Service with websocket updates
 
 ## "Road Blocks and Hurdles"
-- Finding up-to-date Angular Google Maps resources online, using the latest version of Angular
+- Finding up-to-date Angular Google Maps resources online, using the Anguler 1.5.x
 - Navigating the Angular Fullstack Yeoman Generator
 - Using ES6 while wading through all the ES5 materials and documentation
 - Using Angular 2 design patterns
 - Asynchronous Javascript
+- Authentication piece
 
 
 ## Prerequisites
